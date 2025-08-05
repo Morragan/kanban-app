@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  migrate:
+    depends_on:
+      - db
+    image: migrate/migrate
+    volumes:
+      - ../db/migrations:/migrations
+    # entrypoint: ['migrate']
+    # command:
+    #   - '-path=/migrations'
+    #   - '-database=${DATABASE_URL}'
+    #   - 'up'

@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:17.5-alpine
+    env_file:
+      - .env.db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  backend:
+    depends_on:
+      - db
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ../backend:/app
+    ports:
+      - '8080:8080'
+volumes:
+  db_data:
